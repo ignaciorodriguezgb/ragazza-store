@@ -1,8 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Badge } from '@/components/ui/badge'
-import { MessageCircle } from 'lucide-react'
+import { WhatsAppIcon } from '@/components/icons/WhatsAppIcon'
 import { formatPrecio, buildWhatsAppUrl } from '@/lib/appUtils'
 import type { Prenda } from '@/types'
 
@@ -14,65 +13,64 @@ export function PrendaCard({ prenda }: PrendaCardProps) {
   const whatsappUrl = buildWhatsAppUrl(prenda.nombre)
 
   return (
-    <div className="group flex flex-col bg-white rounded-sm overflow-hidden border border-brand-border hover:shadow-lg transition-shadow duration-300">
-      {/* Imagen */}
-      <div className="relative aspect-[3/4] overflow-hidden bg-background">
+    <article className="group bg-white">
+
+      {/* Image */}
+      <div className="relative aspect-[3/4] overflow-hidden bg-[#F5F0EA]">
         {prenda.imagen_url ? (
           <Image
             src={prenda.imagen_url}
             alt={prenda.nombre}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-background">
-            <span className="font-serif text-foreground/30 text-lg">Sin imagen</span>
+          <div className="w-full h-full flex items-center justify-center">
+            <span className="font-serif text-[#1C1917]/20 text-sm tracking-widest">Sin imagen</span>
           </div>
         )}
+
+        {/* WhatsApp overlay on hover */}
+        <div className="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 bg-[#1C1917] text-white font-sans text-[10px] tracking-[0.18em] uppercase py-3 w-full"
+          >
+            <WhatsAppIcon size={13} />
+            Consultar por WhatsApp
+          </a>
+        </div>
       </div>
 
-      {/* Contenido */}
-      <div className="flex flex-col gap-3 p-4 flex-1">
-        <div>
-          <p className="font-sans text-[10px] tracking-[0.25em] text-brand-rose uppercase mb-1">
-            {prenda.categoria}
-          </p>
-          <h3 className="font-serif text-xl font-light text-foreground leading-tight">
-            {prenda.nombre}
-          </h3>
-        </div>
-
-        <p className="font-sans text-lg font-medium text-gold">
+      {/* Info */}
+      <div className="pt-3 pb-1">
+        <p className="font-sans text-[9px] tracking-[0.22em] text-[#D4788C] uppercase mb-1">
+          {prenda.categoria}
+        </p>
+        <h3 className="font-serif text-[1rem] font-light text-[#1C1917] leading-snug mb-1">
+          {prenda.nombre}
+        </h3>
+        <p className="font-sans text-sm font-medium text-[#C9A84C]">
           {formatPrecio(prenda.precio)}
         </p>
 
-        {/* Talles */}
+        {/* Sizes */}
         {prenda.talles.length > 0 && (
-          <div className="flex flex-wrap gap-1">
+          <div className="flex gap-1 mt-2 flex-wrap">
             {prenda.talles.map((talle) => (
-              <Badge
+              <span
                 key={talle}
-                variant="outline"
-                className="text-[10px] px-2 py-0 border-brand-border text-foreground/60 font-sans"
+                className="font-sans text-[9px] text-[#1C1917]/40 tracking-wide"
               >
                 {talle}
-              </Badge>
+              </span>
             ))}
           </div>
         )}
-
-        {/* Botón WhatsApp */}
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-auto w-full inline-flex items-center justify-center bg-gold hover:bg-gold/90 text-white font-sans text-xs tracking-wider px-4 py-2 rounded-sm transition-colors"
-        >
-          <MessageCircle className="w-4 h-4 mr-2" />
-          Consultar por WhatsApp
-        </a>
       </div>
-    </div>
+    </article>
   )
 }

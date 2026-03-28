@@ -3,9 +3,9 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { createSupabaseBrowserClient } from '@/lib/supabase-client'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import Image from 'next/image'
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('')
@@ -33,17 +33,47 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-sm space-y-8">
-        <div className="text-center">
-          <p className="font-serif text-3xl font-light tracking-[0.2em] text-foreground">RAGAZZA</p>
-          <p className="font-sans text-xs tracking-[0.4em] text-brand-rose uppercase mt-1">STORE · ADMIN</p>
-          <div className="w-8 h-[1px] bg-gold mx-auto mt-4" />
+    <div className="min-h-screen bg-background flex items-center justify-center px-6">
+
+      {/* Soft background glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0"
+        style={{
+          background: 'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.05) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="relative w-full max-w-sm">
+
+        {/* Header */}
+        <div className="text-center mb-10">
+          <div className="flex justify-center mb-5">
+            <Image
+              src="https://assets.cdn.filesafe.space/wqut8nAElrNZjsfF73RK/media/69c7fd24d4c304383e4eba5d.svg"
+              alt="Ragazza Store"
+              width={48}
+              height={48}
+              className="object-contain opacity-80"
+              priority
+            />
+          </div>
+          <p className="font-serif text-3xl font-light tracking-[0.22em] text-foreground leading-none">
+            RAGAZZA
+          </p>
+          <p className="font-sans text-[9px] tracking-[0.5em] text-brand-rose uppercase mt-1">
+            STORE · ADMIN
+          </p>
+          <div className="gold-line mx-auto mt-5" />
         </div>
 
+        {/* Form */}
         <form onSubmit={handleLogin} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="email" className="font-sans text-xs tracking-wider text-foreground/70 uppercase">
+            <Label
+              htmlFor="email"
+              className="font-sans text-[10px] tracking-[0.25em] text-foreground/50 uppercase"
+            >
               Email
             </Label>
             <Input
@@ -52,11 +82,15 @@ export default function AdminLogin() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="border-brand-border bg-white font-sans text-sm"
+              className="border-brand-border bg-white font-sans text-sm h-11 focus-visible:ring-gold"
             />
           </div>
+
           <div className="space-y-2">
-            <Label htmlFor="password" className="font-sans text-xs tracking-wider text-foreground/70 uppercase">
+            <Label
+              htmlFor="password"
+              className="font-sans text-[10px] tracking-[0.25em] text-foreground/50 uppercase"
+            >
               Contraseña
             </Label>
             <Input
@@ -65,21 +99,21 @@ export default function AdminLogin() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="border-brand-border bg-white font-sans text-sm"
+              className="border-brand-border bg-white font-sans text-sm h-11 focus-visible:ring-gold"
             />
           </div>
 
           {error && (
-            <p className="font-sans text-xs text-red-500 text-center">{error}</p>
+            <p className="font-sans text-xs text-red-400 text-center tracking-wide">{error}</p>
           )}
 
-          <Button
+          <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gold hover:bg-gold/90 text-white font-sans text-xs tracking-widest uppercase"
+            className="btn-gold w-full justify-center mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? 'Ingresando...' : 'Ingresar'}
-          </Button>
+          </button>
         </form>
       </div>
     </div>

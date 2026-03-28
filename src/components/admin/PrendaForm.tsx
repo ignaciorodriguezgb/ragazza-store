@@ -88,7 +88,7 @@ export function PrendaForm({ prenda }: PrendaFormProps) {
       const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
 
       const { error: uploadError } = await supabase.storage
-        .from('imagenes')
+        .from('prendas')
         .upload(fileName, imagenFile, { contentType: imagenFile.type })
 
       if (uploadError) {
@@ -98,7 +98,7 @@ export function PrendaForm({ prenda }: PrendaFormProps) {
       }
 
       const { data: { publicUrl } } = supabase.storage
-        .from('imagenes')
+        .from('prendas')
         .getPublicUrl(fileName)
 
       imagen_url = publicUrl
@@ -106,7 +106,7 @@ export function PrendaForm({ prenda }: PrendaFormProps) {
       if (prenda?.imagen_url) {
         const oldFileName = prenda.imagen_url.split('/').pop()
         if (oldFileName) {
-          await supabase.storage.from('imagenes').remove([oldFileName])
+          await supabase.storage.from('prendas').remove([oldFileName])
         }
       }
     }

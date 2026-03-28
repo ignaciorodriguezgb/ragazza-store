@@ -1,26 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── Design Tokens ──────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
   --color-brand-rose: var(--brand-rose);
   --color-brand-border: var(--brand-border);
+  --color-cream-dark: var(--cream-dark);
   --font-sans: var(--font-montserrat);
   --font-serif: var(--font-cormorant);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -37,61 +32,264 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: calc(var(--radius) * 1.5);
 }
 
 :root {
-  /* Brand colors */
-  --background: #F5F0EB;
-  --foreground: #2C2C2C;
-  --gold: #D4AF6A;
-  --brand-rose: #E8849A;
-  --brand-border: #E8E0D8;
+  /* Brand palette */
+  --background:   #F8F4EF;
+  --foreground:   #1C1917;
+  --gold:         #C9A84C;
+  --gold-light:   #E8D5A3;
+  --brand-rose:   #D4788C;
+  --brand-border: #E2D9CF;
+  --cream-dark:   #EDE6DC;
 
   /* Fonts */
   --font-montserrat: 'Montserrat', sans-serif;
   --font-cormorant: 'Cormorant Garamond', serif;
 
-  /* shadcn tokens — adapted to brand */
-  --card: #FFFFFF;
-  --card-foreground: #2C2C2C;
-  --popover: #FFFFFF;
-  --popover-foreground: #2C2C2C;
-  --primary: #D4AF6A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F5F0EB;
-  --secondary-foreground: #2C2C2C;
-  --muted: #F5F0EB;
-  --muted-foreground: #9A8F85;
-  --accent: #F5F0EB;
-  --accent-foreground: #2C2C2C;
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: #E8E0D8;
-  --input: #E8E0D8;
-  --ring: #D4AF6A;
-  --radius: 0.25rem;
-  --sidebar: #F5F0EB;
-  --sidebar-foreground: #2C2C2C;
-  --sidebar-primary: #D4AF6A;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #F5F0EB;
-  --sidebar-accent-foreground: #2C2C2C;
-  --sidebar-border: #E8E0D8;
-  --sidebar-ring: #D4AF6A;
+  /* shadcn tokens */
+  --card:                    #FFFFFF;
+  --card-foreground:         #1C1917;
+  --popover:                 #FFFFFF;
+  --popover-foreground:      #1C1917;
+  --primary:                 #C9A84C;
+  --primary-foreground:      #FFFFFF;
+  --secondary:               #F8F4EF;
+  --secondary-foreground:    #1C1917;
+  --muted:                   #F0EBE3;
+  --muted-foreground:        #9B8E84;
+  --accent:                  #F0EBE3;
+  --accent-foreground:       #1C1917;
+  --destructive:             oklch(0.577 0.245 27.325);
+  --border:                  #E2D9CF;
+  --input:                   #E2D9CF;
+  --ring:                    #C9A84C;
+  --radius:                  0rem;
 }
 
+/* ─── Base ───────────────────────────────────────── */
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  * { @apply border-border; }
+
+  html {
+    font-family: var(--font-montserrat);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-montserrat);
   }
-  html {
-    font-family: var(--font-montserrat);
+
+  ::selection {
+    background: #C9A84C22;
+    color: #1C1917;
+  }
+}
+
+/* ─── Keyframes ──────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-right {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-6px); }
+}
+
+/* ─── Animation Utilities ────────────────────────── */
+.animate-fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-fade-up-delay-1 { animation: fade-up 0.7s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-up-delay-2 { animation: fade-up 0.7s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-up-delay-3 { animation: fade-up 0.7s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-up-delay-4 { animation: fade-up 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.animate-fade-up-delay-5 { animation: fade-up 0.7s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.animate-fade-in { animation: fade-in 0.5s ease both; }
+
+.gold-shimmer {
+  background: linear-gradient(
+    105deg,
+    #C9A84C 0%,
+    #E8D5A3 40%,
+    #C9A84C 60%,
+    #C9A84C 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 3s linear infinite;
+}
+
+/* ─── Grain Texture Overlay ──────────────────────── */
+.grain::after {
+  content: '';
+  position: fixed;
+  inset: -200%;
+  width: 400%;
+  height: 400%;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ─── Gold Divider Line ──────────────────────────── */
+.gold-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C, transparent);
+}
+
+.gold-line-full {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C9A84C40, transparent);
+}
+
+/* ─── Typography Utilities ───────────────────────── */
+.heading-display {
+  font-family: var(--font-cormorant);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+}
+
+.heading-serif {
+  font-family: var(--font-cormorant);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.label-spaced {
+  font-family: var(--font-montserrat);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+}
+
+/* ─── Card Hover Effect ──────────────────────────── */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px -10px rgba(28, 25, 23, 0.12);
+}
+
+/* ─── Image Zoom ─────────────────────────────────── */
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.06);
+}
+
+/* ─── Gold Button ────────────────────────────────── */
+.btn-gold {
+  position: relative;
+  overflow: hidden;
+  background: #C9A84C;
+  color: white;
+  font-family: var(--font-montserrat);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btn-gold:hover::before {
+  transform: translateX(100%);
+}
+.btn-gold:hover {
+  background: #1C1917;
+}
+
+/* ─── Ghost Button ───────────────────────────────── */
+.btn-ghost-dark {
+  font-family: var(--font-montserrat);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border: 1px solid currentColor;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+  background: transparent;
+  text-decoration: none;
+}
+.btn-ghost-dark:hover {
+  background: #1C1917;
+  color: white;
+  border-color: #1C1917;
+}
+
+/* ─── Scrollbar ──────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #F8F4EF; }
+::-webkit-scrollbar-thumb { background: #C9A84C55; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #C9A84C; }
+
+/* ─── Focus Ring ─────────────────────────────────── */
+*:focus-visible {
+  outline: 2px solid #C9A84C;
+  outline-offset: 2px;
+}
+
+/* ─── Reduced Motion ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

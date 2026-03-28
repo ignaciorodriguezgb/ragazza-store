@@ -1,11 +1,11 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { Button } from '@/components/ui/button'
+import { X } from 'lucide-react'
 import { CATEGORIAS, TALLES, type Categoria, type Talle } from '@/types'
 
 const RANGOS_PRECIO = [
-  { label: 'Todos', min: 0, max: Infinity },
+  { label: 'Todos los precios', min: 0, max: Infinity },
   { label: 'Hasta $1.000', min: 0, max: 1000 },
   { label: '$1.000 – $3.000', min: 1000, max: 3000 },
   { label: 'Más de $3.000', min: 3000, max: Infinity },
@@ -20,18 +20,20 @@ export interface FiltrosState {
 
 interface FiltrosProps {
   onChange: (filtros: FiltrosState) => void
+  initialCategoria?: Categoria | null
 }
 
-const INITIAL_STATE: FiltrosState = {
-  categoria: null,
-  talles: [],
-  precioMin: 0,
-  precioMax: Infinity,
-}
+export function Filtros({ onChange, initialCategoria }: FiltrosProps) {
+  const INITIAL_STATE: FiltrosState = {
+    categoria: initialCategoria ?? null,
+    talles: [],
+    precioMin: 0,
+    precioMax: Infinity,
+  }
 
-export function Filtros({ onChange }: FiltrosProps) {
   const [filtros, setFiltros] = useState<FiltrosState>(INITIAL_STATE)
   const [rangoActivo, setRangoActivo] = useState(0)
+  const [precioOpen, setPrecioOpen] = useState(false)
 
   const update = useCallback((next: FiltrosState) => {
     setFiltros(next)
@@ -51,95 +53,112 @@ export function Filtros({ onChange }: FiltrosProps) {
 
   const setRango = (index: number) => {
     setRangoActivo(index)
+    setPrecioOpen(false)
     update({ ...filtros, precioMin: RANGOS_PRECIO[index].min, precioMax: RANGOS_PRECIO[index].max })
   }
 
   const resetFiltros = () => {
     setRangoActivo(0)
-    update(INITIAL_STATE)
+    setPrecioOpen(false)
+    update({ categoria: null, talles: [], precioMin: 0, precioMax: Infinity })
   }
 
   const hayFiltros = filtros.categoria !== null || filtros.talles.length > 0 || rangoActivo !== 0
 
   return (
-    <div className="w-full bg-white border border-brand-border rounded-sm p-5 space-y-5">
-      {/* Categoría */}
-      <div>
-        <p className="font-sans text-[10px] tracking-[0.3em] text-foreground/50 uppercase mb-3">
-          Categoría
-        </p>
-        <div className="flex flex-wrap gap-2">
+    <div className="border-b border-[#E8E3DD] bg-white">
+      <div className="max-w-7xl mx-auto px-5 py-3 flex flex-wrap items-center gap-x-6 gap-y-3">
+
+        {/* Categories */}
+        <div className="flex items-center gap-1.5 flex-wrap">
+          <span className="font-sans text-[9px] tracking-[0.25em] text-[#1C1917]/30 uppercase mr-1">Categoría</span>
+          <button
+            onClick={() => update({ ...filtros, categoria: null })}
+            className={`font-sans text-[10px] tracking-[0.12em] px-3 py-1 border transition-colors duration-150 uppercase ${
+              filtros.categoria === null
+                ? 'border-[#1C1917] bg-[#1C1917] text-white'
+                : 'border-[#E8E3DD] text-[#1C1917]/60 hover:border-[#1C1917]/40'
+            }`}
+          >
+            Todas
+          </button>
           {CATEGORIAS.map((cat) => (
             <button
               key={cat}
               onClick={() => toggleCategoria(cat)}
-              className={`font-sans text-xs tracking-wide px-3 py-1.5 rounded-sm border transition-colors capitalize ${
+              className={`font-sans text-[10px] tracking-[0.12em] px-3 py-1 border transition-colors duration-150 capitalize ${
                 filtros.categoria === cat
-                  ? 'bg-gold text-white border-gold'
-                  : 'border-brand-border text-foreground/70 hover:border-gold hover:text-gold'
+                  ? 'border-[#1C1917] bg-[#1C1917] text-white'
+                  : 'border-[#E8E3DD] text-[#1C1917]/60 hover:border-[#1C1917]/40'
               }`}
             >
               {cat}
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Talle */}
-      <div>
-        <p className="font-sans text-[10px] tracking-[0.3em] text-foreground/50 uppercase mb-3">
-          Talle
-        </p>
-        <div className="flex gap-2">
+        <div className="hidden sm:block h-4 w-px bg-[#E8E3DD]" />
+
+        {/* Sizes */}
+        <div className="flex items-center gap-1.5">
+          <span className="font-sans text-[9px] tracking-[0.25em] text-[#1C1917]/30 uppercase mr-1">Talle</span>
           {TALLES.map((talle) => (
             <button
               key={talle}
               onClick={() => toggleTalle(talle)}
-              className={`font-sans text-xs w-10 h-10 border rounded-sm transition-colors ${
+              className={`font-sans text-[10px] w-8 h-7 border transition-colors duration-150 ${
                 filtros.talles.includes(talle)
-                  ? 'bg-gold text-white border-gold'
-                  : 'border-brand-border text-foreground/70 hover:border-gold hover:text-gold'
+                  ? 'border-[#1C1917] bg-[#1C1917] text-white'
+                  : 'border-[#E8E3DD] text-[#1C1917]/60 hover:border-[#1C1917]/40'
               }`}
             >
               {talle}
             </button>
           ))}
         </div>
-      </div>
 
-      {/* Precio */}
-      <div>
-        <p className="font-sans text-[10px] tracking-[0.3em] text-foreground/50 uppercase mb-3">
-          Precio
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {RANGOS_PRECIO.map((rango, i) => (
-            <button
-              key={rango.label}
-              onClick={() => setRango(i)}
-              className={`font-sans text-xs tracking-wide px-3 py-1.5 rounded-sm border transition-colors ${
-                rangoActivo === i
-                  ? 'bg-gold text-white border-gold'
-                  : 'border-brand-border text-foreground/70 hover:border-gold hover:text-gold'
-              }`}
-            >
-              {rango.label}
-            </button>
-          ))}
+        <div className="hidden sm:block h-4 w-px bg-[#E8E3DD]" />
+
+        {/* Price */}
+        <div className="relative">
+          <button
+            onClick={() => setPrecioOpen(!precioOpen)}
+            className={`font-sans text-[10px] tracking-[0.12em] px-3 py-1 border transition-colors duration-150 flex items-center gap-1 uppercase ${
+              rangoActivo !== 0
+                ? 'border-[#1C1917] bg-[#1C1917] text-white'
+                : 'border-[#E8E3DD] text-[#1C1917]/60 hover:border-[#1C1917]/40'
+            }`}
+          >
+            {rangoActivo === 0 ? 'Precio' : RANGOS_PRECIO[rangoActivo].label}
+            <span style={{ fontSize: '8px' }}>▼</span>
+          </button>
+          {precioOpen && (
+            <div className="absolute top-full left-0 mt-1 bg-white border border-[#E8E3DD] z-20 min-w-[180px] shadow-sm">
+              {RANGOS_PRECIO.map((rango, i) => (
+                <button
+                  key={rango.label}
+                  onClick={() => setRango(i)}
+                  className={`block w-full text-left font-sans text-[10px] tracking-wide px-4 py-2 hover:bg-[#F8F4EF] transition-colors ${
+                    rangoActivo === i ? 'text-[#C9A84C] font-medium' : 'text-[#1C1917]/70'
+                  }`}
+                >
+                  {rango.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
 
-      {/* Limpiar filtros */}
-      {hayFiltros && (
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={resetFiltros}
-          className="font-sans text-xs text-brand-rose hover:text-brand-rose/80 p-0 h-auto"
-        >
-          Limpiar filtros
-        </Button>
-      )}
+        {hayFiltros && (
+          <button
+            onClick={resetFiltros}
+            className="flex items-center gap-1 font-sans text-[10px] tracking-wider text-[#D4788C] hover:text-[#D4788C]/70 transition-colors uppercase"
+          >
+            <X style={{ width: '10px', height: '10px' }} />
+            Limpiar
+          </button>
+        )}
+      </div>
     </div>
   )
 }
