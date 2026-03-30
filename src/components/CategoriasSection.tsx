@@ -1,11 +1,11 @@
 import { CATEGORIAS, type Categoria } from '@/types'
 
 const CATEGORIA_CONFIG: Record<Categoria, { label: string; bg: string; textColor: string }> = {
-  vestidos:    { label: 'Vestidos',    bg: 'linear-gradient(145deg, #F5E6D8 0%, #DEB89A 100%)', textColor: '#1C1917' },
-  blusas:      { label: 'Blusas',      bg: 'linear-gradient(145deg, #EDE8F5 0%, #C4B8D6 100%)', textColor: '#1C1917' },
-  pantalones:  { label: 'Pantalones',  bg: 'linear-gradient(145deg, #E8EDE5 0%, #B8C8B0 100%)', textColor: '#1C1917' },
-  sacos:       { label: 'Sacos',       bg: 'linear-gradient(145deg, #1C1917 0%, #2E2826 100%)',  textColor: '#F8F4EF' },
-  accesorios:  { label: 'Accesorios',  bg: 'linear-gradient(145deg, #F5EDD8 0%, #C9A84C 100%)', textColor: '#1C1917' },
+  vestidos:    { label: 'Vestidos',         bg: 'linear-gradient(145deg, #F5E6D8 0%, #DEB89A 100%)', textColor: '#1C1917' },
+  blusas:      { label: 'Blusas y camisas', bg: 'linear-gradient(145deg, #EDE8F5 0%, #C4B8D6 100%)', textColor: '#1C1917' },
+  pantalones:  { label: 'Pantalones',       bg: 'linear-gradient(145deg, #E8EDE5 0%, #B8C8B0 100%)', textColor: '#1C1917' },
+  sacos:       { label: 'Sacos',            bg: 'linear-gradient(145deg, #1C1917 0%, #2E2826 100%)',  textColor: '#F8F4EF' },
+  buzos:       { label: 'Buzos',            bg: 'linear-gradient(145deg, #EDE6DC 0%, #C8B89A 100%)', textColor: '#1C1917' },
 }
 
 export function CategoriasSection() {
@@ -20,8 +20,8 @@ export function CategoriasSection() {
           </a>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {CATEGORIAS.filter((cat) => cat !== 'accesorios').map((cat) => {
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+          {CATEGORIAS.map((cat) => {
             const config = CATEGORIA_CONFIG[cat]
             return (
               <a

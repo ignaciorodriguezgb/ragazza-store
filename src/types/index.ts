@@ -1,4 +1,4 @@
-export type Categoria = 'vestidos' | 'blusas' | 'pantalones' | 'sacos' | 'accesorios'
+export type Categoria = 'vestidos' | 'blusas' | 'pantalones' | 'sacos' | 'buzos'
 export type Talle = 'XS' | 'S' | 'M' | 'L' | 'XL'
 
 export interface Prenda {
@@ -14,6 +14,6 @@ export interface Prenda {
   updated_at: string
 }
 
-export const CATEGORIAS: Categoria[] = ['vestidos', 'blusas', 'pantalones', 'sacos', 'accesorios']
+export const CATEGORIAS: Categoria[] = ['vestidos', 'blusas', 'pantalones', 'sacos', 'buzos']
 export const TALLES: Talle[] = ['XS', 'S', 'M', 'L', 'XL']
 export const WHATSAPP_NUMBER = '59894485929'

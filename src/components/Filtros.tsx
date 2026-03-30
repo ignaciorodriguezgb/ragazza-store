@@ -120,7 +120,7 @@ export function Filtros({ onChange, initialCategoria }: FiltrosProps) {
           <div className="flex-1 overflow-x-auto" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             <div className="flex gap-1.5" style={{ minWidth: 'max-content' }}>
               <button onClick={() => update({ ...filtros, categoria: null })} className={`${chipBase} ${filtros.categoria === null ? chipActive : chipInactive} uppercase`}>Todas</button>
-              {CATEGORIAS.filter(c => c !== 'accesorios').map((cat) => (
+              {CATEGORIAS.map((cat) => (
                 <button key={cat} onClick={() => toggleCategoria(cat)} className={`${chipBase} ${filtros.categoria === cat ? chipActive : chipInactive} capitalize`}>{cat}</button>
               ))}
             </div>
