@@ -85,9 +85,9 @@ export function Hero() {
           <div className="relative aspect-[3/4] overflow-hidden">
             <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c8166889c1000a73f19495.svg" alt="" fill className="object-cover" sizes="50vw" priority />
           </div>
-          <div className="grid grid-rows-2 gap-1.5">
+          <div className="aspect-[3/4] grid grid-rows-2 gap-1.5">
             <div className="relative overflow-hidden">
-              <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c816684c0a46fdd3116740.svg" alt="" fill className="object-cover" sizes="50vw" priority />
+              <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c816684c0a46fdd3116740.svg" alt="" fill className="object-cover object-top" sizes="50vw" priority />
             </div>
             <div className="relative overflow-hidden">
               <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c81668d1a9e708aa7e4416.svg" alt="" fill className="object-cover" sizes="50vw" />

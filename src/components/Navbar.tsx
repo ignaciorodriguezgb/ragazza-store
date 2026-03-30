@@ -39,8 +39,8 @@ export function Navbar() {
           </div>
         </a>
 
-        {/* Center: logo */}
-        <div className="flex justify-center">
+        {/* Center: logo — solo desktop */}
+        <div className="hidden md:flex justify-center">
           <a href="/">
             <Image
               src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c80f3f89c100f412f11fda.svg"
