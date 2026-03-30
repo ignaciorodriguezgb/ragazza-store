@@ -82,26 +82,28 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Images 2x2 */}
-        <div className="grid grid-cols-2 gap-1.5 px-5 pb-10">
-          <div className="relative aspect-[3/4] overflow-hidden">
-            <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c8166889c1000a73f19495.svg" alt="" fill className="object-cover" sizes="50vw" priority />
-          </div>
-          <div className="aspect-[3/4] grid grid-rows-2 gap-1.5">
-            <div className="relative overflow-hidden">
-              <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c816684c0a46fdd3116740.svg" alt="" fill className="object-cover object-top" sizes="50vw" priority />
+        {/* Images 2x2 + tagline pegada */}
+        <div className="px-5 pb-10 flex flex-col gap-1.5">
+          <div className="grid grid-cols-2 gap-1.5">
+            <div className="relative aspect-[3/4] overflow-hidden">
+              <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c8166889c1000a73f19495.svg" alt="" fill className="object-cover" sizes="50vw" priority />
             </div>
-            <div className="relative overflow-hidden">
-              <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c81668d1a9e708aa7e4416.svg" alt="" fill className="object-cover" sizes="50vw" />
+            <div className="aspect-[3/4] grid grid-rows-2 gap-1.5">
+              <div className="relative overflow-hidden">
+                <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c816684c0a46fdd3116740.svg" alt="" fill className="object-cover object-top" sizes="50vw" priority />
+              </div>
+              <div className="relative overflow-hidden">
+                <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c81668d1a9e708aa7e4416.svg" alt="" fill className="object-cover" sizes="50vw" />
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Tagline bar */}
-        <div className="relative h-14 overflow-hidden">
-          <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c812b25b7f0406a17c71b2.png" alt="" fill className="object-cover object-center" sizes="100vw" />
-          <div className="absolute inset-0 bg-black/30 flex items-center px-5">
-            <p className="font-serif italic text-white/80 text-base font-light">eleganza senza confini.</p>
+          {/* Tagline pegada al grid */}
+          <div className="relative h-16 overflow-hidden">
+            <Image src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c812b25b7f0406a17c71b2.png" alt="" fill className="object-cover object-center" sizes="100vw" />
+            <div className="absolute inset-0 bg-black/30 flex items-center px-4">
+              <p className="font-serif italic text-white/80 text-base font-light">eleganza senza confini.</p>
+            </div>
           </div>
         </div>
       </div>
