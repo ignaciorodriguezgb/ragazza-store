@@ -25,7 +25,7 @@ export function Navbar() {
         scrolled || menuOpen ? 'border-b border-[#E8E3DD]' : 'border-b border-[#E8E3DD]/60'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 md:px-5 h-[64px] md:h-[80px] grid grid-cols-3 items-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-5 h-[64px] md:h-[80px] flex items-center justify-between md:grid md:grid-cols-3">
 
         {/* Left: brand text */}
         <a href="/" className="flex items-center">
