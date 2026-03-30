@@ -25,15 +25,15 @@ export function Navbar() {
         scrolled || menuOpen ? 'border-b border-[#E8E3DD]' : 'border-b border-[#E8E3DD]/60'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 h-[80px] grid grid-cols-3 items-center">
+      <div className="max-w-7xl mx-auto px-4 md:px-5 h-[64px] md:h-[80px] grid grid-cols-3 items-center">
 
         {/* Left: brand text */}
-        <a href="/" className="flex items-center gap-0">
+        <a href="/" className="flex items-center">
           <div>
-            <p className="font-serif text-[1.4rem] font-light tracking-[0.22em] text-[#1C1917] leading-none">
+            <p className="font-serif text-[1rem] md:text-[1.4rem] font-light tracking-[0.2em] text-[#1C1917] leading-none">
               RAGAZZA
             </p>
-            <p className="font-sans text-[9px] tracking-[0.45em] text-[#D4788C] uppercase leading-none mt-[3px]">
+            <p className="font-sans text-[7px] md:text-[9px] tracking-[0.4em] text-[#D4788C] uppercase leading-none mt-[2px] md:mt-[3px]">
               STORE
             </p>
           </div>
@@ -45,9 +45,9 @@ export function Navbar() {
             <Image
               src="https://assets.cdn.filesafe.space/qPoL6jo2aF8oNgys3rFq/media/69c80f3f89c100f412f11fda.svg"
               alt="Ragazza Store"
-              width={68}
-              height={68}
-              className="object-contain"
+              width={48}
+              height={48}
+              className="object-contain md:w-[68px] md:h-[68px]"
               priority
             />
           </a>

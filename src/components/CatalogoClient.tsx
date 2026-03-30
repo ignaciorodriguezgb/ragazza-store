@@ -43,7 +43,7 @@ export function CatalogoClient({ prendas, categoriaDefault }: CatalogoClientProp
   return (
     <div>
       {/* Sticky horizontal filters */}
-      <div className="sticky top-[80px] z-40">
+      <div className="sticky top-[64px] md:top-[80px] z-40">
         <Filtros onChange={setFiltros} initialCategoria={categoriaDefault} />
       </div>
 
